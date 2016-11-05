@@ -8,7 +8,7 @@ Binary Search Tools
 \description{
 The 'bsearchtools' package exposes the binary search based functions of the C++ standar library 
 (std::lower_bound, std::upper_bound) plus other convenience functions, allowing faster lookups on sorted vectors.
-It also includes a data.frame wrapper (DFI), which automatically create indexes on the desired columns for faster lookups.
+It also includes lightweight data.frame wrapper (DFI), which automatically creates indexes on the columns for faster lookups.
 }
 \details{
 \tabular{ll}{
@@ -23,7 +23,6 @@ This package allows to perform the most common binary search operations on sorte
 (integer, numeric, bool and charater vectors are supported).
 It exposes lower-bound/upper-bound functions working exactly like their the C++ standard library counterparts, 
 and some convenience functions allowing efficient values and ranges lookups.
-
 
 These functions are especially designed to be used for non-vectorized operations (e.g. inside loops).
 For vectorized operations the great \code{data.table} package already fullfills basically every R programmer needs.
