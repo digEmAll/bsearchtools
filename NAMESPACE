@@ -1,0 +1,7 @@
+useDynLib(bsearchtools)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+
+S3method(print, DFI)
+S3method(print, DFI.FEXPR)
+S3method(toString, DFI.FEXPR)
