@@ -5,7 +5,7 @@ Version: 0.0.37
 Date: 2016-10-25
 Author: Marco Giuliano
 Maintainer: Marco Giuliano <mgiuliano.mail@gmail.com>
-Description: The 'bsearchtools' package exposes the binary search functions of the C++ standar library (std::lower_bound, std::upper_bound) allowing faster lookups on sorted vectors.
+Description: The 'bsearchtools' package exposes the binary search functions of the C++ standar library (std::lower_bound, std::upper_bound) plus other convenience functions, allowing faster lookups on sorted vectors.
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.4)
 URL: https://github.com/digEmAll/bsearchtools
