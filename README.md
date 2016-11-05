@@ -106,8 +106,7 @@ tm2 <- system.time( for(i in 1:500) res2 <- DFI.subset(DFIobj,filter=RG('Values'
 
 ##### N.B.  
 If the original vector/data.frame is small, or the size of the filtered result is very similar to original vector/data.frame size, 
-bsearchtools performance gain will become negligible or possibly worse than base R. So, these functions should be used when appropriate 
-and after careful testing both the possibilities.
+the performance gain of bsearchtools functions will become negligible or possibly worse than base R. So, these functions should be used when appropriate and after testing carefully both the possibilities.
 
 
 ### License
