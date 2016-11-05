@@ -12,7 +12,7 @@ For vectorized operations the great `data.table` package already fullfills basic
 
 __(*)__   
 _lightweight_ in the sense that is just a `data.frame`, with `class(x) = c('DFI','data.frame')` 
-plus an attribute containing the necessary indexes data. So it still can be used as a plain normal `data.frame`, 
+plus an attribute containing the necessary indexes data. So it can still be used as a normal `data.frame`, 
 since the base functions have not been overridden (except for `print`, which prepend the list of indexed columns).
 
 ### Examples : 
@@ -47,10 +47,10 @@ DFIobj <- DFI(DF)
 # (Name == 'John' | Name == 'Emily') & Age >= 25 & Age <= 60
 res <- DFI.subset(DFIobj, AND(OR(EQ('Name','John'),EQ('Name','Emily')),RG('Age',25,60)))
 # returns :
-# > res
-#    Name Age
-# 1  John  30
-# 4 Emily  27
+> res
+   Name Age
+1  John  30
+4 Emily  27
 
 ```
 
@@ -60,8 +60,6 @@ res <- DFI.subset(DFIobj, AND(OR(EQ('Name','John'),EQ('Name','Emily')),RG('Age',
   `1e6` elements :
   
 ```r
-library(bsearchtools)
-
 set.seed(123) # for reproducibility
 sortedValues <- sort(sample(1:1e4,1e6,replace=TRUE))
 
@@ -85,15 +83,15 @@ tm2 <- system.time( for(i in 1:500) res2 <- indexesInRangeInteger(sortedValues,7
 
 ```r
 set.seed(123) # for reproducibility
-DF <- data.frame(Letters=sample(LETTERS,1e6,replace=TRUE),
+DF <- data.frame(LT=sample(LETTERS,1e6,replace=TRUE),
                  Values=sample(1:1e4,1e6,replace=TRUE),
                  stringsAsFactors = FALSE)
 # we want to index only 'Values' column, by default all columns are indexed
 DFIobj <- DFI(DF,indexes.col.names = 'Values') 
 
 # measure time difference doing same operation 500 times
-tm1 <- system.time( for(i in 1:500) res1 <- DF[DF$Values >= 4500 & DF$Values <= 5000, 'Letters' ] )
-tm2 <- system.time( for(i in 1:500) res2 <- DFI.subset(DFIobj,filter=RG('Values',4500,5000),colFilter='Letters') )
+tm1 <- system.time( for(i in 1:500) res1 <- DF[DF$Values >= 4500 & DF$Values <= 5000, 'LT' ] )
+tm2 <- system.time( for(i in 1:500) res2 <- DFI.subset(DFIobj,filter=RG('Values',4500,5000),colFilter='LT') )
 
 > tm1
    user  system elapsed 
