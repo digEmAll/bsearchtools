@@ -25,7 +25,6 @@ indexesEqualToCharacter(sortedValues,valueToSearch,indexesRemap=NULL)
 }
 \value{
 The indexes of the vector elements equal to valueToSearch.
-See description for details.
 }
 \examples{
 indexesEqualTo(c(1,4,5,5,7,9),5) # returns c(3,4)

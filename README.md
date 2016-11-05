@@ -54,6 +54,62 @@ res <- DFI.subset(DFIobj, AND(OR(EQ('Name','John'),EQ('Name','Emily')),RG('Age',
 
 ```
 
+### Benchmarks :
+
+- Get indexes of elements between in range `[7000,7500]` in a random numeric vector of
+  `1e6` elements :
+  
+```r
+library(bsearchtools)
+
+set.seed(123) # for reproducibility
+sortedValues <- sort(sample(1:1e4,1e6,replace=TRUE))
+
+# measure time difference doing same operation 500 times
+tm1 <- system.time( for(i in 1:500) res1 <- which(sortedValues >= 7000 & sortedValues <= 7500))
+tm2 <- system.time( for(i in 1:500) res2 <- indexesInRangeInteger(sortedValues,7000,7500))
+
+> tm1
+   user  system elapsed 
+  12.50    2.47   14.97 
+
+> tm2
+   user  system elapsed 
+   0.02    0.02    0.03 
+
+
+```
+
+
+- Subset a data.frame with `1e6` rows based on range selection on a numeric column :
+
+```r
+set.seed(123) # for reproducibility
+DF <- data.frame(Letters=sample(LETTERS,1e6,replace=TRUE),
+                 Values=sample(1:1e4,1e6,replace=TRUE),
+                 stringsAsFactors = FALSE)
+# we want to index only 'Values' column, by default all columns are indexed
+DFIobj <- DFI(DF,indexes.col.names = 'Values') 
+
+# measure time difference doing same operation 500 times
+tm1 <- system.time( for(i in 1:500) res1 <- DF[DF$Values >= 4500 & DF$Values <= 5000, 'Letters' ] )
+tm2 <- system.time( for(i in 1:500) res2 <- DFI.subset(DFIobj,filter=RG('Values',4500,5000),colFilter='Letters') )
+
+> tm1
+   user  system elapsed 
+  14.80    2.42   17.22 
+> tm2
+   user  system elapsed 
+   1.85    0.00    1.84 
+
+```
+
+##### N.B.  
+If the original vector/data.frame is small, or the size of the filtered result is very similar to original vector/data.frame size, 
+bsearchtools performance gain will become negligible or possibly worse than base R. So, these functions should be used when appropriate 
+and after careful testing both the possibilities.
+
+
 ### License
 
 GPL (>= 2)

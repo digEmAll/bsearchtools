@@ -34,7 +34,6 @@ if \code{sortedValues} vector contains \code{NA}, the result is unpredictable an
 }
 \value{
 The index pointing to the first element in the vector that is not less than (i.e. greater or equal to) valueToSearch.
-See description for details.
 }
 \references{
 See http://en.cppreference.com/w/cpp/algorithm/lower_bound

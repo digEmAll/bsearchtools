@@ -4,7 +4,7 @@
 Subset a DFI object
 }
 \description{
-Subset a DFI object efficiently by creating complex filters on indexed columns.
+Function to subset a DFI object efficiently (using binary search) by creating complex filters on indexed columns.
 For information about \code{NA} handling, please refer to \code{\link[bsearchtools]{rowfilters.DFI}}
 }
 \usage{

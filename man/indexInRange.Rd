@@ -26,7 +26,6 @@ indexesInRangeCharacter(sortedValues,lbInclusive, ubInclusive,indexesRemap=NULL)
 }
 \value{
 The indexes of the vector elements included in range [lbInclusive,ubInclusive].
-See description for details.
 }
 \examples{
 indexesInRange(c(1,4,5,5,7,9),5,7) # returns c(3,4,5)

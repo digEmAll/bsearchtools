@@ -88,9 +88,9 @@ indexes <- DFI.subset(DFIobj,RG('v2',2,4),return.indexes=TRUE)
 set.seed(123) # for reproducibility
 sortedValues <- sort(sample(1:1e4,1e5,replace=TRUE))
 
-# search values in range [7000,7500] 2000 times to measure the time differenc
-tm1 <- system.time( for(i in 1:2000) res2 <- which(sortedValues >= 7000 & sortedValues <= 7500))
-tm2 <- system.time( for(i in 1:2000) res1 <- indexesInRangeInteger(sortedValues,7000,7500))
+# measure time difference doing same operation 500 times
+tm1 <- system.time( for(i in 1:500) res2 <- which(sortedValues >= 7000 & sortedValues <= 7500))
+tm2 <- system.time( for(i in 1:500) res1 <- indexesInRangeInteger(sortedValues,7000,7500))
 
 print(paste("'which' took:",tm1["elapsed"]))
 print(paste("'indexesInRangeInteger' took:",tm2["elapsed"]))
