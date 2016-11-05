@@ -111,5 +111,15 @@ the performance gain of bsearchtools functions will become negligible or possibl
 
 GPL (>= 2)
 
+### Possible improvements
+
+- Accept a filter like 'A <= 3 & B == 5' etc. (a fast and reliable parser is needed)
+- Improve DFI.subset function, in particular on complex filter
+- Better NA support ?
+
+
+
+
+
 
 
