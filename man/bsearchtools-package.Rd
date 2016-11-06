@@ -6,16 +6,16 @@
 Binary Search Tools
 }
 \description{
-The 'bsearchtools' package exposes the binary search based functions of the C++ standar library 
+Exposes the binary search based functions of the C++ standard library 
 (std::lower_bound, std::upper_bound) plus other convenience functions, allowing faster lookups on sorted vectors.
-It also includes lightweight data.frame wrapper (DFI), which automatically creates indexes on the columns for faster lookups.
+It also includes a lightweight data.frame wrapper (DFI), which automatically creates indexes on the columns for faster lookups.
 }
 \details{
 \tabular{ll}{
 Package: \tab bsearchtools\cr
 Type: \tab Package\cr
-Version: \tab 0.0.3\cr
-Date: \tab 2016-10-25\cr
+Version: \tab 0.0.41\cr
+Date: \tab 2016-11-06\cr
 License: \tab GPL (>= 2)\cr
 }
 
@@ -24,8 +24,8 @@ This package allows to perform the most common binary search operations on sorte
 It exposes lower-bound/upper-bound functions working exactly like their the C++ standard library counterparts, 
 and some convenience functions allowing efficient values and ranges lookups.
 
-These functions are especially designed to be used for non-vectorized operations (e.g. inside loops).
-For vectorized operations the great \code{data.table} package already fullfills basically every R programmer needs.
+Note that these functions are especially designed to be used for non-vectorized operations (e.g. inside loops);
+for vectorized operations, the great \code{data.table} package already fullfills basically every R programmer needs.
 }
 \author{
 Marco Giuliano
@@ -40,7 +40,8 @@ See http://en.cppreference.com/w/
 \keyword{ iteration }
 \keyword{ programming }
 \seealso{
-\code{\link[base]{order}}
+\code{\link[base]{sort}},
+\code{\link[base]{order}},
 \code{\link[data.table]{data.table}}
 }
 \examples{

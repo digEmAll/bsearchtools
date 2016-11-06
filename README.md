@@ -1,7 +1,7 @@
 # bsearchtools
 ## Binary search tools for R.
 
-The `bsearchtools` package exposes the binary search based functions of the C++ standar library 
+The `bsearchtools` package exposes the binary search based functions of the C++ standard library 
 (`std::lower_bound`, `std::upper_bound`) plus other convenience functions, allowing faster lookups on sorted vectors.
 
 It also includes a lightweight**(*)** `data.frame` wrapper (`DFI`), which automatically creates indexes on the 

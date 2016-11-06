@@ -4,7 +4,7 @@
 \alias{indexesInRangeInteger}
 \alias{indexesInRangeLogical}
 \alias{indexesInRangeCharacter}
-\title{Find indexes in range using binary search}
+\title{Find indexes in a range using binary search}
 \description{
 Given a sorted vector, it returns the indexes of the vector elements included in range [lbInclusive,ubInclusive].
 

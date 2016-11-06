@@ -4,7 +4,7 @@
 \alias{indexesEqualToInteger}
 \alias{indexesEqualToLogical}
 \alias{indexesEqualToCharacter}
-\title{Find indexes of value using binary search}
+\title{Find indexes of a value using binary search}
 \description{
 Given a sorted vector, it returns the indexes of the vector elements equal to valueToSearch.
 
