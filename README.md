@@ -60,7 +60,7 @@ res <- DFI.subset(DFIobj, AND(OR(EQ('Name','John'),EQ('Name','Emily')),RG('Age',
 
 ### Benchmarks :
 
-- Get indexes of elements between in range `[7000,7500]` in a random numeric vector of
+- Get indexes of elements in range `[7000,7500]` of a random numeric vector of
   `1e6` elements :
   
 ```r
@@ -83,7 +83,7 @@ tm2 <- system.time( for(i in 1:500) res2 <- indexesInRangeInteger(sortedValues,7
 ```
 
 
-- Subset a data.frame with `1e6` rows based on range selection on a numeric column :
+- Subset a data.frame with `1e6` rows, performing a range selection on a numeric column :
 
 ```r
 set.seed(123) # for reproducibility
