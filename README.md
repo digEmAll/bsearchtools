@@ -15,6 +15,10 @@ _lightweight_ in the sense that is just a `data.frame`, with `class(x) = c('DFI'
 plus an attribute containing the necessary indexes data. So it can still be used as a normal `data.frame`, 
 since the base functions have not been overridden (except for `print`, which prepend the list of indexed columns).
 
+### Installation
+
+The package is available on CRAN : https://cran.r-project.org/package=bsearchtools
+
 ### Examples : 
 
 - Get lower and upper bound indexes :
