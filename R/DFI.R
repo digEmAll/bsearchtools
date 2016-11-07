@@ -53,7 +53,7 @@ DFI.indexes <- function(DFIobj){
 
 DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=TRUE, colFilter=NULL, drop=NULL){
   if(!is.DFI(DFIobj))
-     stop('DFIobj is not of class DFI')
+    stop('DFIobj is not of class DFI')
   if(is.null(filter)){
     idxs <- 1:nrow(DFIobj)
   }else{
@@ -63,14 +63,14 @@ DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=T
   }
   if(return.indexes)
     return(idxs)
-  if(is.null(drop)){
+  if(!is.null(drop)){
     if(!is.null(colFilter))
-	  return(DFIobj[idxs,colFilter,drop])
-    return(DFIobj[idxs,,drop])
+      return(DFIobj[idxs,colFilter,drop=drop])
+    return(DFIobj[idxs,,drop=drop])
   }else{
     if(!is.null(colFilter))
-	  return(DFIobj[idxs,colFilter])
-    return(DFIobj[idxs])
+      return(DFIobj[idxs,colFilter])
+    return(DFIobj[idxs,])
   }
 }
 
