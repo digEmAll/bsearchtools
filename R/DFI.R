@@ -32,7 +32,13 @@ is.DFI <- function(x){
 }
 
 print.DFI <- function(x,...){
-  print.data.frame(x,...)
+  if(is.data.frame(x)){
+    print.data.frame(x,...)
+  }else{
+    attr(tmp,'indexes') <- NULL
+    class(tmp) <- 'matrix'
+    print(tmp)
+  }
   cat(paste0('\nINDEXES:\n',paste0(names(attr(x,which='indexes',exact=TRUE)),collapse='\n')))
 }
 
@@ -45,20 +51,27 @@ DFI.indexes <- function(DFIobj){
   return(names(attr(DFIobj,which='indexes',exact=TRUE)))
 }
 
-DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=TRUE, colFilter=NULL){
+DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=TRUE, colFilter=NULL, drop=NULL){
   if(!is.DFI(DFIobj))
      stop('DFIobj is not of class DFI')
-  if(is.null(filter))
-    return(1:nrow(DFIobj))
-
-  idxs <- .filterRecursive(DFIobj, filter)
-  if(sort.indexes)
-    idxs <- sort(idxs)
+  if(is.null(filter)){
+    idxs <- 1:nrow(DFIobj))
+  }else{
+    idxs <- .filterRecursive(DFIobj, filter)
+    if(sort.indexes)
+      idxs <- sort(idxs)
+  }
   if(return.indexes)
     return(idxs)
-  if(!is.null(colFilter))
-	return(DFIobj[idxs,colFilter])
-  return(DFIobj[idxs,])
+  if(is.null(drop)){
+    if(!is.null(colFilter))
+	  return(DFIobj[idxs,colFilter,drop])
+    return(DFIobj[idxs,,drop])
+  }else{
+    if(!is.null(colFilter))
+	  return(DFIobj[idxs,colFilter])
+    return(DFIobj[idxs])
+  }
 }
 
 RG <- function(col,from,to){
