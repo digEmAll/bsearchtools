@@ -14,6 +14,7 @@ __(*)__
 _lightweight_ in the sense that is just a `data.frame`, with `class(x) = c('DFI','data.frame')` 
 plus an attribute containing the necessary indexes data. So it can still be used as a normal `data.frame`, 
 since the base functions have not been overridden (except for `print`, which prepend the list of indexed columns).
+This "simplicity" unfortunately means that if you change some values in the data.frame indexed columns, you should recreate a DFI object (indexes are not automatically updated at the moment).
 
 ### Installation
 
@@ -136,6 +137,7 @@ GPL (>= 2)
 - Accept a filter like 'A <= 3 & B == 5' etc. (a fast and reliable parser is needed)
 - Improve DFI.subset function, in particular on complex filter
 - Better NA support ?
+- Give warnings when DFI indexed columns are modified ?
 
 
 
