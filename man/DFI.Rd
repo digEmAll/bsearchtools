@@ -27,13 +27,13 @@ These attribues will be used to perform faster lookups.
 }
 \note{
 Indexes are NOT recreated/updated automatically; 
-if you change some value in one or more indexed columns (e.g. using \code{`[<-`} operator, the indexed won't be valid anymore and \code{DFI.subset()} will give wrong results.
+if you change some value in one or more indexed columns (e.g. using \code{`[<-`} operator), the indexed won't be valid anymore and \code{DFI.subset()} will give wrong results.
 }
 \value{
 	An object with class \code{c("DFI","data.frame")}
 }
 \seealso{
-\code{\link[bsearchtools]{DFI}},\code{\link[bsearchtools]{DFI.subset}}
+\code{\link[bsearchtools]{DFI.subset}}
 }
 \examples{
 
