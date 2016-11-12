@@ -22,11 +22,18 @@ is.DFI(x)
 }
 \details{
 
-Basically, \code{DFI()} function creates a copy of \code{DF}, changes its class attribute to \code{c("DFI","data.frame")} and adds an attribute called "indexes" which is a list containing, for each column to be indexed, a list with two elements : the ordered indexes and the sorted column values. These attribues will be used to perform faster lookups.
-
+Basically, \code{DFI()} function creates a copy of \code{DF}, changes its class attribute to \code{c("DFI","data.frame")} and adds an attribute called "indexes" which is a list containing, for each column to be indexed, a list with two elements : the ordered indexes and the sorted column values. 
+These attribues will be used to perform faster lookups. 
+}
+\note{
+Indexes are NOT recreated/updated automatically; 
+if you change some value in one or more indexed columns (e.g. using \code{`[<-`} operator, the indexed won't be valid anymore and \code{DFI.subset()} will give wrong results.
 }
 \value{
 	An object with class \code{c("DFI","data.frame")}
+}
+\seealso{
+\code{\link[bsearchtools]{DFI}},\code{\link[bsearchtools]{DFI.subset}}
 }
 \examples{
 
