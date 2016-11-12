@@ -26,8 +26,9 @@ Basically, \code{DFI()} function creates a copy of \code{DF}, changes its class 
 These attribues will be used to perform faster lookups. 
 }
 \note{
-Indexes are NOT recreated/updated automatically; 
-if you change some value in one or more indexed columns (e.g. using \code{`[<-`} operator), the indexed won't be valid anymore and \code{DFI.subset()} will give wrong results.
+Indexes are NOT recreated/updated automatically: 
+if values of an indexed column are modified (e.g. using \code{`[<-`} operator), the corresponding index won't be valid anymore and \code{DFI.subset()} will give wrong results.
+For performance reasons no warning is given in those cases, so please consider the indexed columns as readonly and do not modify them.
 }
 \value{
 	An object with class \code{c("DFI","data.frame")}
