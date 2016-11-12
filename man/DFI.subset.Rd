@@ -23,6 +23,7 @@ DFI.subset(DFIobj, filter=NULL, return.indexes=FALSE,
 Returns a subset of the data.frame or matrix wrapped by the DFI object, unless \code{return.indexes==TRUE} in which case an integer vector with the row indexes will be returned.
 }
 \seealso{
+\code{\link[bsearchtools]{DFI}},
 \code{\link[bsearchtools]{EQ}},
 \code{\link[bsearchtools]{IN}},
 \code{\link[bsearchtools]{RG}},
