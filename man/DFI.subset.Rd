@@ -17,7 +17,7 @@ DFI.subset(DFIobj, filter=NULL, return.indexes=FALSE,
   \item{return.indexes}{if TRUE, the row indexes satisfying the filter are returned instead of the DFI subset.}
   \item{sort.indexes}{if FALSE the order of the rows or row.index is not necessarily equal to the original order in the DFI object. If TRUE, subsetting will keep the original row/row.indexes order.}
   \item{colFilter}{if \code{return.indexes==TRUE} is ignored; otherwise, if not NULL, it will be passed as second argument of data.frame/matrix subset operator i.e. \code{[,colFilter]}  }
-  \item{drop}{if different from \code{NULL} and \code{return.indexes=FALSE} is passed as \code{drop} argument of data.frame and matrix subset.}
+  \item{drop}{if different from \code{NULL} is passed as \code{drop} argument of data.frame and matrix subset (ignored if \code{return.indexes=TRUE}).}
 }
 \value{
 Returns a subset of the data.frame or matrix wrapped by the DFI object, unless \code{return.indexes==TRUE} in which case an integer vector with the row indexes will be returned.

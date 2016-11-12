@@ -59,7 +59,7 @@ DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=T
   }else{
     idxs <- .filterRecursive(DFIobj, filter)
     if(sort.indexes)
-      idxs <- sort(idxs)
+      idxs <- sort.int(idxs)
   }
   if(return.indexes)
     return(idxs)
@@ -181,14 +181,14 @@ intersectIndexesList <- function(lst){
   if(L == 0)
     return(integer())
   if(L == 1)
-    return(sort(unique(lst[[1]])))
+    return(sort.int(unique(lst[[1]])))
   # .intersectInteger already sorts the results
   Reduce(f=.intersectInteger,x=lst)
 }
 
 # sort(Reduce(f=union,x=lst))
 unionIndexesList <- function(lst){
-  sort(Reduce(f=union,x=lst))
+  sort.int(Reduce(f=union,x=lst))
 }
 
 .filterRecursive <- function(DFIobj, expr){
