@@ -14,6 +14,7 @@ __(*)__
 _lightweight_ in the sense that is just a `data.frame`, with `class(x) = c('DFI','data.frame')` 
 plus an attribute containing the necessary indexes data. So it can still be used as a normal `data.frame`, 
 since the base functions have not been overridden (except for `print`, which prepend the list of indexed columns).
+This "simplicity" unfortunately means that if you change some values in the data.frame indexed columns, you should recreate a DFI object (indexes are not automatically updated at the moment).
 
 ### Installation
 
@@ -60,6 +61,15 @@ res <- DFI.subset(DFIobj, AND(OR(EQ('Name','John'),EQ('Name','Emily')),RG('Age',
 
 ### Benchmarks :
 
+
+- Tested on :
+```
+R: 3.2.5 64bit   
+OS: Window 10  
+CPU: i5 6600K @3.5 Ghz  
+RAM: 16 GB
+```
+
 - Get indexes of elements in range `[7000,7500]` of a random numeric vector of
   `1e6` elements :
   
@@ -73,11 +83,11 @@ tm2 <- system.time( for(i in 1:500) res2 <- indexesInRangeInteger(sortedValues,7
 
 > tm1
    user  system elapsed 
-  12.50    2.47   14.97 
+  10.87    2.72   13.61 
 
 > tm2
    user  system elapsed 
-   0.02    0.02    0.03 
+   0.04    0.00    0.04
 
 
 ```
@@ -97,12 +107,19 @@ DFIobj <- DFI(DF,indexes.col.names = 'Values')
 tm1 <- system.time( for(i in 1:500) res1 <- DF[DF$Values >= 4500 & DF$Values <= 5000, 'LT' ] )
 tm2 <- system.time( for(i in 1:500) res2 <- DFI.subset(DFIobj,filter=RG('Values',4500,5000),colFilter='LT') )
 
+# and if you're not interested in keeping the original row order : 
+tm3 <- system.time( for(i in 1:500) res3 <- DFI.subset(DFIobj,filter=RG('Values',4500,5000),colFilter='LT', 
+                                                       sort.indexes = FALSE) )
+
 > tm1
    user  system elapsed 
-  14.80    2.42   17.22 
+  14.80    1.84   16.64 
 > tm2
    user  system elapsed 
-   1.85    0.00    1.84 
+   1.86    0.00    1.86 
+> tm3
+   user  system elapsed 
+   0.29    0.00    0.30
 
 ```
 
@@ -120,6 +137,7 @@ GPL (>= 2)
 - Accept a filter like 'A <= 3 & B == 5' etc. (a fast and reliable parser is needed)
 - Improve DFI.subset function, in particular on complex filter
 - Better NA support ?
+- Give warnings when DFI indexed columns are modified ?
 
 
 
