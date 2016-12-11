@@ -8,14 +8,14 @@ Binary Search Tools
 \description{
 Exposes the binary search based functions of the C++ standard library 
 (std::lower_bound, std::upper_bound) plus other convenience functions, allowing faster lookups on sorted vectors.
-It also includes a lightweight data.frame wrapper (DFI), which automatically creates indexes on the columns for faster lookups.
+It also includes a lightweight data.frame/matrix wrapper (DFI), which automatically creates indexes on the columns for faster lookups.
 }
 \details{
 \tabular{ll}{
 Package: \tab bsearchtools\cr
 Type: \tab Package\cr
-Version: \tab 0.0.43\cr
-Date: \tab 2016-11-07\cr
+Version: \tab 0.0.47\cr
+Date: \tab 2016-12-11\cr
 License: \tab GPL (>= 2)\cr
 }
 
@@ -33,7 +33,9 @@ Marco Giuliano
 Maintainer: Marco Giuliano <mgiuliano.mail@gmail.com>
 }
 \references{
-See http://en.cppreference.com/w/
+Project repository : https://github.com/digEmAll/bsearchtools/
+
+cpp reference page : http://en.cppreference.com/w/
 }
 \keyword{ package }
 \keyword{ manip }

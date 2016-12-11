@@ -7,8 +7,6 @@ DFI <- function(DF,indexes.col.names=colnames(DF)){
   if(is.matrix(DF))
     getColVector <- function(dd,nm) dd[,nm]
   
-  DF2 <- DF
-  class(DF2) <- c('DFI',class(DF))
   indexes <- list()
   if(!is.null(indexes.col.names)){
     for(name in indexes.col.names){
@@ -19,8 +17,18 @@ DFI <- function(DF,indexes.col.names=colnames(DF)){
       indexes[[name]] <- list(idxs=idxs,sorted=col[idxs])
     }
   }
-  attr(DF2,which='indexes') <- indexes
-  return(DF2)  
+  DFIobj <- structure(list(x=DF,idx=indexes),class='DFI')
+  return(DFIobj)  
+}
+
+# the following 3 functions are the only one used to interrogate the wrapper
+.getData <- function(DFIobj){
+  #return(DFIobj$x)
+  return(DFIobj[[1]])
+}
+.getIndexes <- function(DFIobj){
+  #return(DFIobj$idx)
+  return(DFIobj[[2]])
 }
 
 as.DFI <- function(DF,indexes.col.names=colnames(DF)){
@@ -32,30 +40,42 @@ is.DFI <- function(x){
 }
 
 print.DFI <- function(x,...){
-  if(is.data.frame(x)){
-    print.data.frame(x,...)
+  if(!is.DFI(x)){
+    print(x,...)
   }else{
-    attr(tmp,'indexes') <- NULL
-    class(tmp) <- 'matrix'
-    print(tmp)
+    print(.getData(x),...)
+    cat(paste0('\nINDEXES:\n',paste0(DFI.indexes(x),collapse='\n')))
   }
-  cat(paste0('\nINDEXES:\n',paste0(names(attr(x,which='indexes',exact=TRUE)),collapse='\n')))
 }
 
+as.matrix.DFI <- function(x,...){
+  as.matrix(DFI.unWrap(x),...)
+}
+
+as.data.frame.DFI <- function(x,...){
+  as.data.frame(DFI.unWrap(x),...)
+}
 
 DFI.getIndex <- function(DFIobj,name){
-  return(attr(DFIobj,which='indexes',exact=TRUE)[[name]])
+  return(.getIndexes(DFIobj)[[name]])
 }
 
 DFI.indexes <- function(DFIobj){
-  return(names(attr(DFIobj,which='indexes',exact=TRUE)))
+  return(names(.getIndexes(DFIobj)))
+}
+
+DFI.unWrap <- function(DFIobj){
+  if(!is.DFI(DFIobj)){
+    return(DFIobj);
+  }
+  return(.getData(DFIobj))
 }
 
 DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=TRUE, colFilter=NULL, drop=NULL){
   if(!is.DFI(DFIobj))
     stop('DFIobj is not of class DFI')
   if(is.null(filter)){
-    idxs <- 1:nrow(DFIobj)
+    idxs <- 1:nrow(.getData(DFIobj))
   }else{
     idxs <- .filterRecursive(DFIobj, filter)
     if(sort.indexes)
@@ -65,12 +85,12 @@ DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=T
     return(idxs)
   if(!is.null(drop)){
     if(!is.null(colFilter))
-      return(DFIobj[idxs,colFilter,drop=drop])
-    return(DFIobj[idxs,,drop=drop])
+      return(.getData(DFIobj)[idxs,colFilter,drop=drop])
+    return(.getData(DFIobj)[idxs,,drop=drop])
   }else{
     if(!is.null(colFilter))
-      return(DFIobj[idxs,colFilter])
-    return(DFIobj[idxs,])
+      return(.getData(DFIobj)[idxs,colFilter])
+    return(.getData(DFIobj)[idxs,])
   }
 }
 
@@ -166,16 +186,16 @@ print.DFI.FEXPR <- function(x,...){
 }
 
 .eval.EQ <- function(DFIobj, expr){
-  tmpDF <- attr(DFIobj,'indexes',exact = TRUE)[[ expr[[1]] ]]
+  tmpDF <- DFI.getIndex(DFIobj, expr[[1]])
   return(indexesEqualTo(tmpDF[[2]],expr[[2]],tmpDF[[1]]))
 }
 
 .eval.RG <- function(DFIobj, expr){
-  tmpDF <- attr(DFIobj,'indexes',exact = TRUE)[[ expr[[1]] ]]
+  tmpDF <- DFI.getIndex(DFIobj, expr[[1]])
   return(indexesInRange(tmpDF[[2]],expr[[2]],expr[[3]],tmpDF[[1]]))
 }
 
-# equivalent (but faster) to sort(unique(Reduce(f=intersect,x=lst)))
+# equivalent (but faster) alternative to sort(unique(Reduce(f=intersect,x=lst)))
 intersectIndexesList <- function(lst){
   L <- length(lst)
   if(L == 0)

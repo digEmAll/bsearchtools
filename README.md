@@ -4,17 +4,11 @@
 The `bsearchtools` package exposes the binary search based functions of the C++ standard library 
 (`std::lower_bound`, `std::upper_bound`) plus other convenience functions, allowing faster lookups on sorted vectors.
 
-It also includes a lightweight**(*)** `data.frame` wrapper (`DFI`), which automatically creates indexes on the 
+It also includes `DFI`, a lightweight `data.frame`/`matrix` wrapper, which automatically creates indexes on the 
 columns for faster lookups.
 
 These functions are especially designed to be used in non-vectorized operations (e.g. inside loops).  
 For vectorized operations the great `data.table` package already fullfills basically every R programmer needs.
-
-__(*)__   
-_lightweight_ in the sense that is just a `data.frame`, with `class(x) = c('DFI','data.frame')` 
-plus an attribute containing the necessary indexes data. So it can still be used as a normal `data.frame`, 
-since the base functions have not been overridden (except for `print`, which prepend the list of indexed columns).
-This "simplicity" unfortunately means that if you change some values in the data.frame indexed columns, you should recreate a DFI object (indexes are not automatically updated at the moment).
 
 ### Installation
 

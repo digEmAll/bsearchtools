@@ -3,5 +3,7 @@ exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
 
 S3method(print, DFI)
+S3method(as.data.frame, DFI)
+S3method(as.matrix, DFI)
 S3method(print, DFI.FEXPR)
 S3method(toString, DFI.FEXPR)

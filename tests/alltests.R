@@ -9,6 +9,9 @@ assert <- function(msg,condition){
       stop(msg)
   }
 }
+doesFail <- function(expr){
+  return(try({expr;TRUE},silent=TRUE) != TRUE)
+}
 capitalizeFirstLetter <- function(s){
   paste(toupper(substring(s, 1,1)), substring(s, 2),sep="")
 }
@@ -85,10 +88,13 @@ DFIobj2 <- as.DFI(DF)
 assert("DFI/as.DFI check", identical(DFIobj1, DFIobj2))  
 assert("is.DFI check", c(is.DFI(DFIobj1),is.DFI(DFIobj2)))
 assert("DFI.indexes check",identical(DFI.indexes(DFIobj1),c("INT","LGL","CHR","DBL")))
+assert("DFI.unWrap",identical(DFI.unWrap(DFIobj1),DF))
+assert("DFI.as.data.frame",identical(DFI.unWrap(DFIobj1),DF))
+assert("DFI.as.matrix",identical(as.matrix(DFI.unWrap(DFIobj1)),as.matrix(DF)))
 
 for(idxName in DFI.indexes(DFIobj1)){
-  expected <- list(idxs=order(DFIobj1[[idxName]],na.last=NA),
-                   sorted=DFIobj1[[idxName]][order(DFIobj1[[idxName]],na.last=NA)])
+  expected <- list(idxs=order(DF[[idxName]],na.last=NA),
+                   sorted=DF[[idxName]][order(DF[[idxName]],na.last=NA)])
   assert(paste("DFI.getIndex",idxName,"check",sep=" "), identical(DFI.getIndex(DFIobj1,idxName),expected))
 }
 
@@ -138,13 +144,13 @@ for(nm in names(allFilterExpr)){
     fexpr <- allFilterExpr[[nm]]
 
     filterString <- toString.DFI.FEXPR(fexpr)
-    selection <- with(DFIobj1, eval(parse(text=filterString)))
+    selection <- with(DF, eval(parse(text=filterString)))
     if(is.null(selection)){
-      selection <- rep.int(TRUE,nrow(DFIobj1))
+      selection <- rep.int(TRUE,nrow(DF))
     }
     selection[is.na(selection)] <- FALSE
     
-    result1 <- DFIobj1[selection,]  
+    result1 <- DF[selection,]  
     result2 <- DFI.subset(DFIobj1,filter = fexpr)
     result2indexes <- DFI.subset(DFIobj1,filter = fexpr,return.indexes=TRUE)
     
@@ -290,6 +296,18 @@ assert("intersectIndexesList indexes2",identical(intersectIndexesList(indexes1),
                                              sort(unique(Reduce(f=intersect,x=indexes1)))
 ))
 
+####################################################################################
+#              TEST verifiable issues                                              #
+####################################################################################
+
+D <- DFI(data.frame(A=1:10,B=21:30))
+M <- DFI(as.matrix(D))
+
+
+assert("issue #2",!identical(DFI.subset(D,filter = NULL, return.indexes = FALSE),
+                             DFI.subset(D,filter = NULL, return.indexes = TRUE)
+))
+assert("issue #3",!is.matrix(DFI.subset(M,filter = IN('A',5), return.indexes = FALSE, drop=TRUE)))
 
 ####################################################################################
 #                                     END                                          #

@@ -1,7 +1,7 @@
 \name{DFI.getIndex}
 \alias{DFI.getIndex}
 \title{
-Get index attribute of a DFI objects
+Extract the index information of a DFI object
 }
 \description{
 Return the index data (i.e. ordered indexes, and sorted values) of an indexed column of a DFI object 
@@ -9,7 +9,6 @@ Return the index data (i.e. ordered indexes, and sorted values) of an indexed co
 \usage{
 DFI.getIndex(DFIobj,name)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{DFIobj}{ a DFI object}
   \item{name}{ the name of the indexed column in the DFI object }

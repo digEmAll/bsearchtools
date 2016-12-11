@@ -1,10 +1,10 @@
 \name{DFI.indexes}
 \alias{DFI.indexes}
 \title{
-Get the indexes names of DFI objects
+Get the indexes names of a DFI object
 }
 \description{
-Method to get the indexes names of DFI objects
+Method to get the indexes names of a DFI object
 }
 \usage{
 DFI.indexes(DFIobj)

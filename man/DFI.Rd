@@ -11,30 +11,36 @@ Turn a data.frame (or matrix) object into a DFI object allowing faster lookups o
 DFI(DF, indexes.col.names=colnames(DF))
 as.DFI(DF, indexes.col.names=colnames(DF)) # exactly the same as DFI()
 is.DFI(x)
-# S3 methods for class 'DFI'
 \method{print}{DFI}(x, \dots)
 }
 \arguments{
   \item{DF}{A data.frame or matrix object (must have column names defined). }
   \item{indexes.col.names}{The column names for which we want to create the indexes. Only integer,numeric,logical and character are supported, so be careful since data.frame by default turns strings into factors (see data.frame \code{stringsAsFactors} argument) }
   \item{x}{A DFI object.}
-  \item{\dots}{optional arguments passed to inner \code{print.data.frame} method .}
+  \item{\dots}{optional arguments passed to inner \code{print} methods of data.frame and matrix .}
 }
 \details{
 
-Basically, \code{DFI()} function creates a copy of \code{DF}, changes its class attribute to \code{c("DFI","data.frame")} and adds an attribute called "indexes" which is a list containing, for each column to be indexed, a list with two elements : the ordered indexes and the sorted column values. 
-These attribues will be used to perform faster lookups. 
+Basically, \code{DFI()} function creates a wrapper of \code{DF}. 
+This wrapper contains the original data.frame or matrix plus the necessary indexes data and the class of the wrapped object.
+These extra data will be used to perform faster lookups (in \code{\link[bsearchtools]{DFI.subset}} function) and can be extracted using the appropriate functions 
+\code{\link[bsearchtools]{DFI.unWrap}},
+\code{\link[bsearchtools]{DFI.indexes}},
+\code{\link[bsearchtools]{DFI.getIndex}}. 
 }
 \note{
-Indexes are NOT recreated/updated automatically: 
-if values of an indexed column are modified (e.g. using \code{`[<-`} operator), the corresponding index won't be valid anymore and \code{DFI.subset()} will give wrong results.
-For performance reasons no warning is given in those cases, so please consider the indexed columns as readonly and do not modify them.
+Since version 0.0.47 DFI objects do not inherit from data.frame or matrix anymore, hence they cannot be modified/subsetted using data.frame/matrix standard operators.
+This has been changed since the column indexes are not recreated automatically and once the object is modified, DFI.subset could give wrong results without any warning.
+To use the standard replacement and subset operators, extract the original object first using \code{DFI.unWrap(DFIobj)}.
 }
 \value{
-	An object with class \code{c("DFI","data.frame")}
+  An object with class \code{"DFI"}
 }
 \seealso{
 \code{\link[bsearchtools]{DFI.subset}}
+\code{\link[bsearchtools]{DFI.unWrap}}
+\code{\link[bsearchtools]{DFI.indexes}}
+\code{\link[bsearchtools]{DFI.getIndex}}
 }
 \examples{
 

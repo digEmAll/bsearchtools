@@ -30,9 +30,9 @@ AND(\dots)
 Any filter function applied to an indexed column will filter out the NAs present in that column by default. So, for example, 
 the following filter: \code{EQ("A",3)} is actually equal to : \code{!is.na(A) & A == 3}. Using \code{print(filterExpr)} / \code{toString(filterExpr)} will return you the string representation of the filter that you would use in a normal data.frame subset.
 
-\code{RG} function accepts \code{NA} in \code{from,to} arguments, and it "turn-off" the part of the filter set to \code{NA}. So, for instance \code{RG("A",NA,to)} will return all values \code{A <= to} (but still filtering out the \code{NA} values).
+\code{RG} function accepts \code{NA} in \code{from,to} arguments, and this "turns off" the part of the filter set to \code{NA}. So, for instance \code{RG("A",NA,to)} will return all values \code{A <= to} (but still filtering out the \code{NA} values).
 
-\code{EQ} function accepts \code{NA} in \code{val} argument, and it simply "turn-off" the filter on the column returning all the elements in the column (but still filtering out the \code{NA} values).
+\code{EQ} function accepts \code{NA} in \code{val} argument, and this simply "turns off" the filter on the column returning all the elements in the column (but still filtering out the \code{NA} values).
 
 \code{IN(colName,values)} function is converted to \code{OR(EQ(colName,values[1]),EQ(colName,value[2]),...)} hence, if \code{values} contains \code{NA}, the filter will return all the elements in the column (but still filtering out the \code{NA} values).
 
