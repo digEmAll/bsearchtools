@@ -1,4 +1,4 @@
-### Changes in v0.0.47
+### Changes in v0.0.47 (2016-12-12)
 
 #### BREAKING CHANGES
   1. Standard `data.frame`/`matrix` subset and replacement operators do not work anymore on `DFI` objects but you need perform them on `DFI.unWrap(DFIobj)`.

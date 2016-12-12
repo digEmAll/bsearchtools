@@ -2,7 +2,7 @@
 \title{News for Package \pkg{bsearchtools}}
 \newcommand{\ghissue}{\href{https://github.com/digEmAll/bsearchtools/issues/#1}{##1}}
 
-\section{Changes in bsearchtools version 0.0.47 (2016-12-11)}{
+\section{Changes in bsearchtools version 0.0.47 (2016-12-12)}{
   \itemize{
     \item Breaking Changes :
     \itemize{

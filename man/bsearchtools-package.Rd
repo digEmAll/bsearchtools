@@ -15,7 +15,7 @@ It also includes a lightweight data.frame/matrix wrapper (DFI), which automatica
 Package: \tab bsearchtools\cr
 Type: \tab Package\cr
 Version: \tab 0.0.47\cr
-Date: \tab 2016-12-11\cr
+Date: \tab 2016-12-12\cr
 License: \tab GPL (>= 2)\cr
 }
 
