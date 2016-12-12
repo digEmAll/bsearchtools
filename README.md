@@ -131,7 +131,6 @@ GPL (>= 2)
 - Accept a filter like 'A <= 3 & B == 5' etc. (a fast and reliable parser is needed)
 - Improve DFI.subset function, in particular on complex filter
 - Better NA support ?
-- Give warnings when DFI indexed columns are modified ?
 
 
 
