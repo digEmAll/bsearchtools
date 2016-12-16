@@ -182,7 +182,7 @@ toString.DFI.FEXPR <- function(x,...){
 }
 
 print.DFI.FEXPR <- function(x,...){
-  return(toString.DFI.FEXPR(x,...))
+  print(toString.DFI.FEXPR(x,...))
 }
 
 .eval.EQ <- function(DFIobj, expr){
