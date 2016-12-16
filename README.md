@@ -17,7 +17,8 @@ The package is available on CRAN : https://cran.r-project.org/package=bsearchtoo
 ### Examples : 
 
 - Get lower and upper bound indexes :
-```r
+
+```R
 sortedVec <- c(1,3,3,5,7,12,15,42)
 
 lb(sortedVec,3) # returns 2
@@ -25,7 +26,8 @@ ub(sortedVec,3) # returns 4
 ```
 
 - Get indexes of elements equal to a value / in a [from,to] range :
-```r
+
+```R
 sortedVec <- c(1,3,3,5,7,12,15,42)
 
 indexesEqualTo(sortedVec,3) # returns c(2,3)
@@ -34,7 +36,8 @@ indexesInRange(sortedVec,5,15) # returns c(4,5,6,7)
 ```
 
 - DFI data.frame wrapper
-```r
+
+```R
 DF <- data.frame(Name=c('John','Jennifer','John','Emily','Peter','Anna','Emily'), 
                  Age=c(30,50,15,27,25,35,70),
                  stringsAsFactors = FALSE)
@@ -67,7 +70,7 @@ RAM: 16 GB
 - Get indexes of elements in range `[7000,7500]` of a random numeric vector of
   `1e6` elements :
   
-```r
+```R
 set.seed(123) # for reproducibility
 sortedValues <- sort(sample(1:1e4,1e6,replace=TRUE))
 
@@ -89,7 +92,7 @@ tm2 <- system.time( for(i in 1:500) res2 <- indexesInRangeInteger(sortedValues,7
 
 - Subset a data.frame with `1e6` rows, performing a range selection on a numeric column :
 
-```r
+```R
 set.seed(123) # for reproducibility
 DF <- data.frame(LT=sample(LETTERS,1e6,replace=TRUE),
                  Values=sample(1:1e4,1e6,replace=TRUE),
