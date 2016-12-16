@@ -215,7 +215,7 @@ unionIndexesList <- function(lst){
   switch (class(expr)[1],
           'DFI.RG' = .eval.RG(DFIobj,expr),
           'DFI.EQ' = .eval.EQ(DFIobj,expr),
-          'DFI.NOT' = setdiff(1:nrow(DFIobj),.filterRecursive(DFIobj,expr[[1]])),
+          'DFI.NOT' = setdiff(1:nrow(.getData(DFIobj)),.filterRecursive(DFIobj,expr[[1]])),
           'DFI.AND' = intersectIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x))),
           'DFI.OR' = unionIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x))),
           stop('unsupported expression, please use RG,IN,EQ,OR,AND functions to create it')
