@@ -102,6 +102,7 @@ for(idxName in DFI.indexes(DFIobj1)){
 # create a lot of expressions and put them in a list
 allFilterExpr <- list(
   INT.eq7 = EQ("INT",7),
+  INT.noteq7 = NOT(EQ("INT",7)),
   INT.eqNA = EQ("INT",NA),
   INT.rg4_8 = RG("INT",4,8),
   INT.rgNA_8 = RG("INT",NA,8),
@@ -110,6 +111,7 @@ allFilterExpr <- list(
   INT.in3_NA_9 = IN("INT",c(3,NA,9)),
   
   DBL.eq0.1 = EQ("DBL",0.1),
+  DBL.noteq0.1 = NOT(EQ("DBL",0.1)),
   DBL.eqNA = EQ("DBL",NA),
   DBL.rg3_5 = RG("DBL",3,5),
   DBL.rgNA_5 = RG("DBL",NA,5),
@@ -118,6 +120,7 @@ allFilterExpr <- list(
   DBL.in4.7_NA_0.1 = IN("DBL",c(4.7,NA,0.1)),
   
   LGL.eqTRUE = EQ("LGL",TRUE),
+  LGL.noteqTRUE = NOT(EQ("LGL",TRUE)),
   LGL.eqNA = EQ("LGL",NA),
   LGL.rgTRUE_FALSE = RG("LGL",TRUE,FALSE),
   LGL.rgFALSE_TRUE = RG("LGL",FALSE,TRUE),
@@ -127,17 +130,19 @@ allFilterExpr <- list(
   LGL.inTRUE_NA_FALSE = IN("LGL",c(TRUE,NA,FALSE)),
   
   CHR.eqA = EQ("CHR","A"),
+  CHR.noteqA = NOT(EQ("CHR","A")),
   CHR.eqNA = EQ("CHR",NA),
   CHR.rgB_D = RG("CHR","B","D"),
   CHR.rgNA_D = RG("CHR",NA,"D"),
   CHR.rgB_NA = RG("CHR","B",NA),
   CHR.inB_D_A = IN("CHR",c("B","D","A")),
   CHR.inB_NA_A = IN("CHR",c("B",NA,"A"))
-  
+    
 )
 
 allFilterExpr$and.1 <- AND(allFilterExpr$INT.eq7, allFilterExpr$CHR.rgB_D)
 allFilterExpr$or.1 <- OR(allFilterExpr$INT.eq7, allFilterExpr$DBL.eq0.1, allFilterExpr$CHR.rgB_D)
+
 
 # compare DFI.subset with normal subsetting described by filter expression toString
 for(nm in names(allFilterExpr)){
