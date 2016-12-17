@@ -92,9 +92,11 @@ assert("DFI.unWrap",identical(DFI.unWrap(DFIobj1),DF))
 assert("DFI.as.data.frame",identical(DFI.unWrap(DFIobj1),DF))
 assert("DFI.as.matrix",identical(as.matrix(DFI.unWrap(DFIobj1)),as.matrix(DF)))
 
+# check on the structure
 for(idxName in DFI.indexes(DFIobj1)){
   expected <- list(idxs=order(DF[[idxName]],na.last=NA),
-                   sorted=DF[[idxName]][order(DF[[idxName]],na.last=NA)])
+                   sorted=DF[[idxName]][order(DF[[idxName]],na.last=NA)],
+                   naidxs=which(is.na(DF[[idxName]])))
   assert(paste("DFI.getIndex",idxName,"check",sep=" "), identical(DFI.getIndex(DFIobj1,idxName),expected))
 }
 
@@ -109,6 +111,7 @@ allFilterExpr <- list(
   INT.rg4_NA = RG("INT",4,NA),
   INT.in3_7_9 = IN("INT",c(3,7,9)),
   INT.in3_NA_9 = IN("INT",c(3,NA,9)),
+  INT.eqna = EQNA("INT"),
   
   DBL.eq0.1 = EQ("DBL",0.1),
   DBL.noteq0.1 = NOT(EQ("DBL",0.1)),
@@ -118,6 +121,7 @@ allFilterExpr <- list(
   DBL.rg3_NA = RG("DBL",3,NA),
   DBL.in4.7_9.5_0.1 = IN("DBL",c(4.7,9.5,0.1)),
   DBL.in4.7_NA_0.1 = IN("DBL",c(4.7,NA,0.1)),
+  DBL.eqna = EQNA("DBL"),
   
   LGL.eqTRUE = EQ("LGL",TRUE),
   LGL.noteqTRUE = NOT(EQ("LGL",TRUE)),
@@ -128,6 +132,7 @@ allFilterExpr <- list(
   LGL.rgFALSE_NA = RG("LGL",FALSE,NA),
   LGL.inTRUE_FALSE = IN("LGL",c(TRUE,FALSE)),
   LGL.inTRUE_NA_FALSE = IN("LGL",c(TRUE,NA,FALSE)),
+  LGL.eqna = EQNA("LGL"),
   
   CHR.eqA = EQ("CHR","A"),
   CHR.noteqA = NOT(EQ("CHR","A")),
@@ -136,7 +141,8 @@ allFilterExpr <- list(
   CHR.rgNA_D = RG("CHR",NA,"D"),
   CHR.rgB_NA = RG("CHR","B",NA),
   CHR.inB_D_A = IN("CHR",c("B","D","A")),
-  CHR.inB_NA_A = IN("CHR",c("B",NA,"A"))
+  CHR.inB_NA_A = IN("CHR",c("B",NA,"A")),
+  CHR.eqna = EQNA("CHR")
     
 )
 

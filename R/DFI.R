@@ -14,10 +14,10 @@ DFI <- function(DF,indexes.col.names=colnames(DF)){
       if(!is.atomic(col) || is.factor(col) || !(typeof(col) %in% c('integer','double','numeric','character','logical')) )
         stop(paste0('Invalid index "',name,'": Indexes can only be atomic vectors of types : integer,double,numeric,character,logical'))
       idxs <- order(col,na.last=NA)
-      indexes[[name]] <- list(idxs=idxs,sorted=col[idxs])
+      indexes[[name]] <- list(idxs=idxs,sorted=col[idxs],naidxs=which(is.na(col)))
     }
   }
-  DFIobj <- structure(list(x=DF,idx=indexes),class='DFI')
+  DFIobj <- structure(list(x=DF,idx=indexes,allidxs=1:nrow(DF)),class='DFI')
   return(DFIobj)  
 }
 
@@ -29,6 +29,10 @@ DFI <- function(DF,indexes.col.names=colnames(DF)){
 .getIndexes <- function(DFIobj){
   #return(DFIobj$idx)
   return(DFIobj[[2]])
+}
+.getAllIndexes <- function(DFIobj){
+  #return(DFIobj$allidxs)
+  return(DFIobj[[3]])
 }
 
 as.DFI <- function(DF,indexes.col.names=colnames(DF)){
@@ -75,7 +79,7 @@ DFI.subset <- function(DFIobj, filter=NULL, return.indexes=FALSE, sort.indexes=T
   if(!is.DFI(DFIobj))
     stop('DFIobj is not of class DFI')
   if(is.null(filter)){
-    idxs <- 1:nrow(.getData(DFIobj))
+    idxs <- .getAllIndexes(DFIobj)
   }else{
     idxs <- .filterRecursive(DFIobj, filter)
     if(sort.indexes)
@@ -116,6 +120,13 @@ AND <- function(...){
   stopifnot(length(andExprs) > 0)
   `class<-`(andExprs,c('DFI.AND','DFI.FEXPR'))
 }
+EQNA <- function(col){
+  `class<-`(list(col=col),c('DFI.EQNA','DFI.FEXPR'))
+}
+
+as.character.DFI.FEXPR <- function(x,...){
+  return(toString(x))
+}
 
 toString.DFI.FEXPR <- function(x,...){
   
@@ -130,7 +141,6 @@ toString.DFI.FEXPR <- function(x,...){
     }
     return(z)
   }
-  
   
   specific.class <- class(x)[1]
   
@@ -148,6 +158,8 @@ toString.DFI.FEXPR <- function(x,...){
     }
     return(paste(c(tmp, gt,lt)[c(tmp, gt,lt) != ""],collapse=" & "))
     
+  }else if(specific.class == "DFI.EQNA"){
+    return(paste("is.na(",x$col,")",sep=""))
   }else if(specific.class == "DFI.EQ"){
    
     tmp <- paste("!is.na(",x$col,")",sep="")
@@ -195,6 +207,11 @@ print.DFI.FEXPR <- function(x,...){
   return(indexesInRange(tmpDF[[2]],expr[[2]],expr[[3]],tmpDF[[1]]))
 }
 
+.eval.EQNA <- function(DFIobj,expr){
+  tmpDF <- DFI.getIndex(DFIobj, expr[[1]])
+  return(tmpDF[[3]])
+}
+
 # equivalent (but faster) alternative to sort(unique(Reduce(f=intersect,x=lst)))
 intersectIndexesList <- function(lst){
   L <- length(lst)
@@ -215,10 +232,11 @@ unionIndexesList <- function(lst){
   switch (class(expr)[1],
           'DFI.RG' = .eval.RG(DFIobj,expr),
           'DFI.EQ' = .eval.EQ(DFIobj,expr),
-          'DFI.NOT' = setdiff(1:nrow(.getData(DFIobj)),.filterRecursive(DFIobj,expr[[1]])),
+          'DFI.EQNA' = .eval.EQNA(DFIobj,expr),
+          'DFI.NOT' = setdiff(.getAllIndexes(DFIobj),.filterRecursive(DFIobj,expr[[1]])),
           'DFI.AND' = intersectIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x))),
           'DFI.OR' = unionIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x))),
-          stop('unsupported expression, please use RG,IN,EQ,OR,AND functions to create it')
+          stop('unsupported expression, please use RG,IN,EQ,EQNA,OR,AND,NOT functions to create it')
   )
 }
 
