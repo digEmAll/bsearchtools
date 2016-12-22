@@ -213,19 +213,33 @@ print.DFI.FEXPR <- function(x,...){
 }
 
 # equivalent (but faster) alternative to sort(unique(Reduce(f=intersect,x=lst)))
-intersectIndexesList <- function(lst){
+intersectIndexesList <- function(lst,sorted=TRUE){
   L <- length(lst)
   if(L == 0)
     return(integer())
-  if(L == 1)
-    return(sort.int(unique(lst[[1]])))
-  # .intersectInteger already sorts the results
-  Reduce(f=.intersectInteger,x=lst)
+  if(L == 1){
+    if(sorted)
+      return(sort.int(unique(lst[[1]])))
+    else
+      return(unique(lst[[1]]))
+  }
+  if(sorted)
+    return(sort.int(Reduce(f=.intersectInteger,x=lst)))
+  else
+    return(Reduce(f=.intersectInteger,x=lst))
 }
 
-# sort(Reduce(f=union,x=lst))
-unionIndexesList <- function(lst){
-  sort.int(Reduce(f=union,x=lst))
+
+# equivalent to : sort(unique(Reduce(f=union,x=lst)))
+unionIndexesList <- function(lst,sorted=TRUE){
+  len <- length(lst)
+  if(len == 0)
+    return(integer())
+  v <- if(length(lst) == 1) unique(lst[[1]]) else Reduce(f=.unionInteger,x=lst) 
+  if(sorted)
+    return(sort.int(v))
+  else
+    return(v)
 }
 
 .filterRecursive <- function(DFIobj, expr){
@@ -234,8 +248,8 @@ unionIndexesList <- function(lst){
           'DFI.EQ' = .eval.EQ(DFIobj,expr),
           'DFI.EQNA' = .eval.EQNA(DFIobj,expr),
           'DFI.NOT' = setdiff(.getAllIndexes(DFIobj),.filterRecursive(DFIobj,expr[[1]])),
-          'DFI.AND' = intersectIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x))),
-          'DFI.OR' = unionIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x))),
+          'DFI.AND' = intersectIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x)),sorted=FALSE),
+          'DFI.OR' = unionIndexesList(lapply(expr,function(x).filterRecursive(DFIobj,x)),sorted=FALSE),
           stop('unsupported expression, please use RG,IN,EQ,EQNA,OR,AND,NOT functions to create it')
   )
 }

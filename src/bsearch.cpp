@@ -263,3 +263,35 @@ Rcpp::IntegerVector intersectInteger(Rcpp::IntegerVector x, Rcpp::IntegerVector 
   return output;
 }
 
+
+// [[Rcpp::export(rng=false,name=".unionInteger")]]
+Rcpp::IntegerVector unionInteger(Rcpp::IntegerVector vec1, Rcpp::IntegerVector vec2){
+  int len1 = vec1.size();
+  int len2 = vec2.size();
+  Rcpp::IntegerVector merged = Rcpp::IntegerVector(len1+len2);
+  for(int i = 0; i < len1; i++){
+    merged[i] = vec1[i];
+  }
+  for(int i = 0; i < len2; i++){
+    merged[i+len1] = vec2[i];
+  }
+  return Rcpp::unique(merged);
+}
+
+// [[Rcpp::export(rng=false,name=".unionIntegerList")]]
+Rcpp::IntegerVector unionIntegerList(Rcpp::List list){
+  int len = list.size();
+  if(len == 0){
+    return Rcpp::IntegerVector(0);
+  }else{
+    Rcpp::IntegerVector currentVec = Rcpp::IntegerVector(0);
+    for(int i = 0; i < len; i++){
+      currentVec = unionInteger(currentVec,Rcpp::as<Rcpp::IntegerVector>(list[i]));
+    }
+    return currentVec;
+  }
+}
+
+
+
+

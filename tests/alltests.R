@@ -164,10 +164,13 @@ for(nm in names(allFilterExpr)){
     result1 <- DF[selection,]  
     result2 <- DFI.subset(DFIobj1,filter = fexpr)
     result2indexes <- DFI.subset(DFIobj1,filter = fexpr,return.indexes=TRUE)
+    result2indexesUnordered  <- DFI.subset(DFIobj1,filter = fexpr,return.indexes=TRUE,sort.indexes=FALSE)
     
     assert(paste("DFI.subset: ",nm,"check subset",sep=" "),identical(result1,result2))
     
     assert(paste("DFI.subset: ",nm,"check indexes",sep=" "),identical(which(selection),result2indexes))
+    
+    assert(paste("DFI.subset: ",nm,"check unordered indexes",sep=" "),setequal(result2indexes,result2indexesUnordered) && length(result2indexes) == length(result2indexesUnordered))
 }
 
 ####################################################################################
