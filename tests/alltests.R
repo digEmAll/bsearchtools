@@ -294,24 +294,29 @@ for(remapEnabled in c(FALSE,TRUE)){
 #              TEST unionIndexesList/intersectIndexesList FUNCTIONS                #
 ####################################################################################
 
-indexes1 <- list(c(7L,2L,3L),c(3L,100L,2L,8L,10L),c(10L,4L,5L,2L))
-indexes2 <- list(c(7L,2L,3L),integer(),c(10L,4L))
+indexesMergeTest <- list()
+indexesMergeTest$indexes1 <- list(c(7L,2L,3L),c(3L,100L,2L,8L,10L),c(10L,4L,5L,2L))
+indexesMergeTest$indexes2 <- list(c(7L,2L,3L),integer(),c(10L,4L))
+indexesMergeTest$indexes3 <- list(c(7L,2L,3L))
+indexesMergeTest$indexes4 <- list()
+indexesMergeTest$indexes5 <- list(integer())
 
-assert("unionIndexesList indexes1",identical(unionIndexesList(indexes1),
-                                             sort(unique(Reduce(f=union,x=indexes1)))
-))
-assert("unionIndexesList indexes2",identical(unionIndexesList(indexes1),
-                                             sort(unique(Reduce(f=union,x=indexes1)))
-))
-assert("intersectIndexesList indexes1",identical(intersectIndexesList(indexes1),
-                                             sort(unique(Reduce(f=intersect,x=indexes1)))
-))
-assert("intersectIndexesList indexes2",identical(intersectIndexesList(indexes1),
-                                             sort(unique(Reduce(f=intersect,x=indexes1)))
-))
+.unionListSorted <- function(lst){ if(length(lst) == 0) integer() else sort(unique(Reduce(f=union,x=lst))) }
+.intersectListSorted <- function(lst){ if(length(lst) == 0) integer() else sort(unique(Reduce(f=intersect,x=lst))) }
+
+for(nm in names(indexesMergeTest)){
+  toTest <- indexesMergeTest[[nm]]
+  assert( paste("unionIndexesList default",nm),     identical( unionIndexesList(toTest), .unionListSorted(toTest))  )
+  assert( paste("unionIndexesList sorted",nm),      identical( unionIndexesList(toTest,sorted=TRUE), .unionListSorted(toTest))  )
+  assert( paste("unionIndexesList unsorted",nm),    identical( sort(unionIndexesList(toTest,sorted=FALSE)), .unionListSorted(toTest))  )
+
+  assert( paste("intersectIndexesList default",nm), identical( intersectIndexesList(toTest), .intersectListSorted(toTest))  )
+  assert( paste("intersectIndexesList sorted",nm),  identical( intersectIndexesList(toTest,sorted=TRUE), .intersectListSorted(toTest))  )
+  assert( paste("intersectIndexesList unsorted",nm),identical( sort(intersectIndexesList(toTest,sorted=FALSE)), .intersectListSorted(toTest))  )
+}
 
 ####################################################################################
-#              TEST verifiable issues                                              #
+#              TEST verifiable issues                                              #    
 ####################################################################################
 
 D <- DFI(data.frame(A=1:10,B=21:30))

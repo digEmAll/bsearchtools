@@ -235,7 +235,7 @@ unionIndexesList <- function(lst,sorted=TRUE){
   len <- length(lst)
   if(len == 0)
     return(integer())
-  v <- if(length(lst) == 1) unique(lst[[1]]) else Reduce(f=.unionInteger,x=lst) 
+  v <- unique(unlist(lst))
   if(sorted)
     return(sort.int(v))
   else
