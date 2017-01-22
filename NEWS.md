@@ -13,7 +13,7 @@
 
 #### BREAKING CHANGES
   1. Standard `data.frame`/`matrix` subset and replacement operators do not work anymore on `DFI` objects but you need perform them on `DFI.unWrap(DFIobj)`.
-            This decision has been made to avoid wrong unnoticed results when `DFI` objects where modified. Also, the internal representation has changed and it
+            This decision has been made to avoid wrong unnoticed results when `DFI` objects are modified. Also, the internal representation has changed and it
             may be subjected to further changes in the future, so the users should not rely on the current structure but only use the provided functions. (#5)
 
 #### BUG FIXES
