@@ -1,3 +1,14 @@
+### Changes in v0.0.59 (2017-01-22)
+
+#### BUG FIXES
+  1. Fixed: `print.DFI.FEXPR` not actually printing but just returning the string (#6)
+  2. Fixed: `NOT` condition not working anymore in version 0.0.47 (#7)
+  
+#### NEW FEATURES
+  1. Added `EQNA` condition to select NA values in DFI objects. (#8)
+  2. Improved `unionIndexesList`,`OR`,`IN` performances
+
+
 ### Changes in v0.0.47 (2016-12-12)
 
 #### BREAKING CHANGES

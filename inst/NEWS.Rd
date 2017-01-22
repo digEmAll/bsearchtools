@@ -2,6 +2,25 @@
 \title{News for Package \pkg{bsearchtools}}
 \newcommand{\ghissue}{\href{https://github.com/digEmAll/bsearchtools/issues/#1}{##1}}
 
+\section{Changes in bsearchtools version 0.0.59 (2017-01-22)}{
+  \itemize{
+   
+    \item Bug Fixes :
+    \itemize{
+      \item Fixed: \code{print.DFI.FEXPR} not actually printing but just returning the string (\ghissue{6})
+      \item Fixed: \code{NOT} condition not working anymore in version 0.0.47 (\ghissue{7})
+    }
+    
+    \item New Features :
+    \itemize{
+      \item Added \code{EQNA} condition to select NA values in DFI objects. (\ghissue{8})
+      \item Improved \code{unionIndexesList},\code{OR},\code{IN} performances
+    }
+    
+  }
+}
+
+
 \section{Changes in bsearchtools version 0.0.47 (2016-12-12)}{
   \itemize{
     \item Breaking Changes :
