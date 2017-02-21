@@ -1,3 +1,8 @@
+### Changes in v0.0.61 (2017-02-22)
+
+#### BUG FIXES
+  1. Fixed: R `v3.4+` requires native symbols registration (#9)
+
 ### Changes in v0.0.59 (2017-01-22)
 
 #### BUG FIXES

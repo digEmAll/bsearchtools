@@ -2,6 +2,17 @@
 \title{News for Package \pkg{bsearchtools}}
 \newcommand{\ghissue}{\href{https://github.com/digEmAll/bsearchtools/issues/#1}{##1}}
 
+\section{Changes in bsearchtools version 0.0.61 (2017-02-22)}{
+  \itemize{
+   
+    \item Bug Fixes :
+    \itemize{
+      \item Fixed: R \code{v3.4+} requires native symbols registration (\ghissue{9})
+    }
+   
+  }
+}
+
 \section{Changes in bsearchtools version 0.0.59 (2017-01-22)}{
   \itemize{
    
