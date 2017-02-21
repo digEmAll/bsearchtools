@@ -14,8 +14,8 @@ It also includes a lightweight data.frame/matrix wrapper (DFI), which automatica
 \tabular{ll}{
 Package: \tab bsearchtools\cr
 Type: \tab Package\cr
-Version: \tab 0.0.59\cr
-Date: \tab 2017-01-22\cr
+Version: \tab 0.0.61\cr
+Date: \tab 2017-02-22\cr
 License: \tab GPL (>= 2)\cr
 }
 
