@@ -2,94 +2,94 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 lbNumeric <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_lbNumeric', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_lbNumeric, sortedValues, valueToSearch)
 }
 
 ubNumeric <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_ubNumeric', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_ubNumeric, sortedValues, valueToSearch)
 }
 
 indexesInRangeNumeric <- function(sortedValues, lbInclusive, ubInclusive, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesInRangeNumeric', PACKAGE = 'bsearchtools', sortedValues, lbInclusive, ubInclusive, indexesRemap)
+    .Call(bsearchtools_indexesInRangeNumeric, sortedValues, lbInclusive, ubInclusive, indexesRemap)
 }
 
 indexesEqualToNumeric <- function(sortedValues, valueToSearch, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesEqualToNumeric', PACKAGE = 'bsearchtools', sortedValues, valueToSearch, indexesRemap)
+    .Call(bsearchtools_indexesEqualToNumeric, sortedValues, valueToSearch, indexesRemap)
 }
 
 lbInteger <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_lbInteger', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_lbInteger, sortedValues, valueToSearch)
 }
 
 ubInteger <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_ubInteger', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_ubInteger, sortedValues, valueToSearch)
 }
 
 indexesInRangeInteger <- function(sortedValues, lbInclusive, ubInclusive, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesInRangeInteger', PACKAGE = 'bsearchtools', sortedValues, lbInclusive, ubInclusive, indexesRemap)
+    .Call(bsearchtools_indexesInRangeInteger, sortedValues, lbInclusive, ubInclusive, indexesRemap)
 }
 
 indexesEqualToInteger <- function(sortedValues, valueToSearch, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesEqualToInteger', PACKAGE = 'bsearchtools', sortedValues, valueToSearch, indexesRemap)
+    .Call(bsearchtools_indexesEqualToInteger, sortedValues, valueToSearch, indexesRemap)
 }
 
 lbCharacter <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_lbCharacter', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_lbCharacter, sortedValues, valueToSearch)
 }
 
 ubCharacter <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_ubCharacter', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_ubCharacter, sortedValues, valueToSearch)
 }
 
 indexesInRangeCharacter <- function(sortedValues, lbInclusive, ubInclusive, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesInRangeCharacter', PACKAGE = 'bsearchtools', sortedValues, lbInclusive, ubInclusive, indexesRemap)
+    .Call(bsearchtools_indexesInRangeCharacter, sortedValues, lbInclusive, ubInclusive, indexesRemap)
 }
 
 indexesEqualToCharacter <- function(sortedValues, valueToSearch, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesEqualToCharacter', PACKAGE = 'bsearchtools', sortedValues, valueToSearch, indexesRemap)
+    .Call(bsearchtools_indexesEqualToCharacter, sortedValues, valueToSearch, indexesRemap)
 }
 
 lbLogical <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_lbLogical', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_lbLogical, sortedValues, valueToSearch)
 }
 
 ubLogical <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_ubLogical', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_ubLogical, sortedValues, valueToSearch)
 }
 
 indexesInRangeLogical <- function(sortedValues, lbInclusive, ubInclusive, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesInRangeLogical', PACKAGE = 'bsearchtools', sortedValues, lbInclusive, ubInclusive, indexesRemap)
+    .Call(bsearchtools_indexesInRangeLogical, sortedValues, lbInclusive, ubInclusive, indexesRemap)
 }
 
 indexesEqualToLogical <- function(sortedValues, valueToSearch, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesEqualToLogical', PACKAGE = 'bsearchtools', sortedValues, valueToSearch, indexesRemap)
+    .Call(bsearchtools_indexesEqualToLogical, sortedValues, valueToSearch, indexesRemap)
 }
 
 lb <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_lb', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_lb, sortedValues, valueToSearch)
 }
 
 ub <- function(sortedValues, valueToSearch) {
-    .Call('bsearchtools_ub', PACKAGE = 'bsearchtools', sortedValues, valueToSearch)
+    .Call(bsearchtools_ub, sortedValues, valueToSearch)
 }
 
 indexesInRange <- function(sortedValues, lbInclusive, ubInclusive, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesInRange', PACKAGE = 'bsearchtools', sortedValues, lbInclusive, ubInclusive, indexesRemap)
+    .Call(bsearchtools_indexesInRange, sortedValues, lbInclusive, ubInclusive, indexesRemap)
 }
 
 indexesEqualTo <- function(sortedValues, valueToSearch, indexesRemap = NULL) {
-    .Call('bsearchtools_indexesEqualTo', PACKAGE = 'bsearchtools', sortedValues, valueToSearch, indexesRemap)
+    .Call(bsearchtools_indexesEqualTo, sortedValues, valueToSearch, indexesRemap)
 }
 
 .intersectInteger <- function(x, y) {
-    .Call('bsearchtools_intersectInteger', PACKAGE = 'bsearchtools', x, y)
+    .Call(bsearchtools_intersectInteger, x, y)
 }
 
 .unionInteger <- function(vec1, vec2) {
-    .Call('bsearchtools_unionInteger', PACKAGE = 'bsearchtools', vec1, vec2)
+    .Call(bsearchtools_unionInteger, vec1, vec2)
 }
 
 .unionIntegerList <- function(list) {
-    .Call('bsearchtools_unionIntegerList', PACKAGE = 'bsearchtools', list)
+    .Call(bsearchtools_unionIntegerList, list)
 }
 
