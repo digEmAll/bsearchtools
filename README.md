@@ -1,3 +1,5 @@
+[![](https://cranlogs.r-pkg.org/badges/bsearchtools)](https://cran.r-project.org/package=bsearchtools)
+
 # bsearchtools
 ## Binary search tools for R.
 
